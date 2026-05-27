@@ -1,0 +1,79 @@
+.custom-dialog-box {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: fixed;
+    background: #282c35;
+    padding: 20px;
+    border: 1px solid #000;
+    z-index: 10000;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 600px;
+    max-height: 600px;
+    overflow: auto;
+    border-radius: 8px;
+}
+
+.custom-dialog-box code {
+    font-family: monospace;
+    display: block;
+    white-space: pre-wrap;
+    color: #DC3278;
+    background-color: #4a4a4a;
+    padding: 10px;
+    border-radius: 5px;
+    max-height: 200px;
+    overflow: auto;
+    margin-bottom: 15px;
+}
+
+.custom-dialog-box h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.copy-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.copy-btn:hover {
+    background-color: #45a049;
+}
+
+.close-btn {
+    background-color: #3399ff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.close-btn:hover {
+    background-color: #2980b9;
+}
+
+.inspect-highlight {
+    position: fixed;
+    border: 2px solid #00ff00;
+    background-color: rgba(0, 255, 0, 0.1);
+    z-index: 9999;
+    pointer-events: none;
+    display: none;
+    transition: all 0.1s ease;
+}
+
+body.inspect-mode-active {
+    cursor: crosshair !important;
+}
+
+body.inspect-mode-active * {
+    cursor: crosshair !important;
+}

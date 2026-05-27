@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      width: 320px;
+      padding: 15px;
+      background: #141E28;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+    }
+
+    h1 {
+      color: #E66E50;
+      margin: 0 0 5px 0;
+      font-size: 20px;
+    }
+
+    .subtitle {
+      color: #888;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section {
+      margin-bottom: 15px;
+    }
+
+    .section-title {
+      color: #326E7D;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .modifier-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .modifier-option {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .modifier-option input[type="checkbox"] {
+      cursor: pointer;
+      accent-color: #E66E50;
+    }
+
+    .modifier-option label {
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .current-mode {
+      background: #282c35;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 13px;
+      color: #4CAF50;
+      margin-top: 15px;
+    }
+
+    .usage {
+      background: #1a2530;
+      padding: 12px;
+      border-radius: 5px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    .usage strong {
+      color: #E66E50;
+    }
+
+    .usage ol {
+      margin: 8px 0;
+      padding-left: 20px;
+    }
+
+    #status {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #4CAF50;
+      text-align: center;
+      min-height: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>ShowWeb 👻</h1>
+  <div class="subtitle">可视化元素路径查看器</div>
+
+  <div class="section">
+    <div class="section-title">启用修饰键选择</div>
+    <div class="modifier-group">
+      <div class="modifier-option">
+        <input type="checkbox" id="ctrlKey" value="ctrl">
+        <label for="ctrlKey">Ctrl</label>
+      </div>
+      <div class="modifier-option">
+        <input type="checkbox" id="altKey" value="alt" checked>
+        <label for="altKey">Alt</label>
+      </div>
+      <div class="modifier-option">
+        <input type="checkbox" id="shiftKey" value="shift" checked>
+        <label for="shiftKey">Shift</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="current-mode" id="currentMode">
+    当前激活方式: Alt + Shift + 点击
+  </div>
+
+  <div class="section" style="margin-top: 20px;">
+    <div class="section-title">使用说明</div>
+    <div class="usage">
+      <ol>
+        <li>勾选需要组合的修饰键（至少选择一个）</li>
+        <li>在网页上按住所选的修饰键，鼠标悬停元素会显示绿色高亮框</li>
+        <li>点击高亮的元素，即可查看 DOM 路径和内容</li>
+        <li>弹窗支持拖拽移动，可点击"复制路径"按钮快速复制</li>
+        <li>释放修饰键即可退出检测模式</li>
+      </ol>
+    </div>
+  </div>
+
+  <div id="status"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
