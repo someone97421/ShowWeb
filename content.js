@@ -174,11 +174,9 @@ const showDialog = (element, event) => {
   closeBtn.addEventListener('click', () => dialog.remove());
   dialog.appendChild(closeBtn);
 
-  // 定位
+  // 定位 - 约束在视口内
   dialog.style.position = 'fixed';
   dialog.style.zIndex = '10000';
-  dialog.style.left = `${event.clientX + 20}px`;
-  dialog.style.top = `${event.clientY + 20}px`;
 
   // 拖拽
   let isDragging = false;
@@ -204,6 +202,21 @@ const showDialog = (element, event) => {
   });
 
   document.body.appendChild(dialog);
+
+  // 计算约束位置
+  const dialogRect = dialog.getBoundingClientRect();
+  let x = event.clientX + 20;
+  let y = event.clientY + 20;
+  if (x + dialogRect.width > window.innerWidth) {
+    x = window.innerWidth - dialogRect.width - 10;
+  }
+  if (y + dialogRect.height > window.innerHeight) {
+    y = window.innerHeight - dialogRect.height - 10;
+  }
+  if (x < 10) x = 10;
+  if (y < 10) y = 10;
+  dialog.style.left = `${x}px`;
+  dialog.style.top = `${y}px`;
 };
 
 // 键盘事件 - 检测修饰键组合
@@ -221,6 +234,20 @@ document.addEventListener('keyup', (e) => {
     document.body.classList.remove('inspect-mode-active');
     removeHighlight();
   }
+});
+
+// 窗口失焦或页面隐藏时退出检测模式
+const exitInspectMode = () => {
+  if (inspectMode) {
+    inspectMode = false;
+    document.body.classList.remove('inspect-mode-active');
+    removeHighlight();
+  }
+};
+
+window.addEventListener('blur', exitInspectMode);
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) exitInspectMode();
 });
 
 // 鼠标移动 - 高亮元素
@@ -241,6 +268,15 @@ document.addEventListener('click', (e) => {
   showDialog(highlightedElement, e);
   removeHighlight();
 }, true);
+
+// 点击弹窗外部关闭弹窗
+document.addEventListener('click', (e) => {
+  if (inspectMode) return;
+  const dialog = document.querySelector('.custom-dialog-box');
+  if (dialog && !dialog.contains(e.target)) {
+    dialog.remove();
+  }
+});
 
 // 初始化加载设置
 loadSettings();
